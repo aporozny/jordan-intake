@@ -1,0 +1,183 @@
+%PDF-1.4
+1 0 obj
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+  /Type /Pages
+  /Kids [3 0 R]
+  /Count 1
+>>
+endobj
+3 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /MediaBox [0 0 595 842]
+  /Resources <<
+    /Font <<
+      /F1 <<
+        /Type /Font
+        /Subtype /Type1
+        /BaseFont /Helvetica
+      >>
+      /F2 <<
+        /Type /Font
+        /Subtype /Type1
+        /BaseFont /Helvetica-Bold
+      >>
+    >>
+  >>
+  /Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+  /Length 2614
+>>
+stream
+q
+% Top Header Bar
+0.07 0.07 0.07 rg
+0 742 595 100 re
+f
+
+% Header Text
+1 1 1 rg
+BT
+/F2 22 Tf
+45 795 Td
+(JORDAN EXECUTIVE PA) Tj
+ET
+
+BT
+/F1 10 Tf
+45 770 Td
+(QUICK-START REFERENCE & FRIDGE CARD  |  QUANTMS MANAGED SERVICES) Tj
+ET
+
+% Accent line
+0.85 0.85 0.85 rg
+45 722 505 1 re
+f
+
+% Section 1: Core Operations
+0.12 0.12 0.12 rg
+BT
+/F2 13 Tf
+45 695 Td
+(1. CORE OPERATIONAL MODES) Tj
+ET
+
+0.25 0.25 0.25 rg
+BT
+/F1 9.5 Tf
+45 675 Td
+( Jordan operates as your direct Chief of Staff and operations coordinator.) Tj
+45 658 Td
+( - Executive Triage: Daily briefings, action item extractions, and priority routing.) Tj
+45 641 Td
+( - Workflow Automation: Interfacing directly with n8n workflows, notifications, and alerts.) Tj
+45 624 Td
+( - Data & Systems Ledger: Monitoring operational states, updates, and key metrics.) Tj
+ET
+
+% Section 2: Recommended Prompts
+0.12 0.12 0.12 rg
+BT
+/F2 13 Tf
+45 590 Td
+(2. ESSENTIAL DIRECTIVES & COMMAND PROMPTS) Tj
+ET
+
+0.2 0.2 0.2 rg
+BT
+/F1 9.5 Tf
+45 570 Td
+(  "Morning Standup"         - Summarise urgent priorities, scheduled blocks, and blockers.) Tj
+45 553 Td
+(  "Draft Briefing: [Topic]" - Synthesise operational notes into a concise, direct update.) Tj
+45 536 Td
+(  "Status Check"            - Verify system uptime, pending pipeline jobs, and inbox counts.) Tj
+45 519 Td
+(  "Action Audit"            - Extract discrete, assignable action items from incoming text.) Tj
+ET
+
+% Section 3: Protocol & Style Rules
+0.12 0.12 0.12 rg
+BT
+/F2 13 Tf
+45 485 Td
+(3. CONVENTIONS & INTERACTION PROTOCOL) Tj
+ET
+
+0.25 0.25 0.25 rg
+BT
+/F1 9.5 Tf
+45 465 Td
+( - Concise & Candor-First: No fluff, filler pleasantries, or corporate apologies.) Tj
+45 448 Td
+( - Immediate Acknowledgment: Direct execution, clear confirmation states, and clean logs.) Tj
+45 431 Td
+( - Confidentiality: Isolated per-client database tenancy, secured by individual session tokens.) Tj
+ET
+
+% Section 4: Access & Portal
+0.12 0.12 0.12 rg
+BT
+/F2 13 Tf
+45 397 Td
+(4. CLIENT PORTAL & API ACCESS) Tj
+ET
+
+0.25 0.25 0.25 rg
+BT
+/F1 9.5 Tf
+45 377 Td
+( - Web Portal: https://jordan.quantms.com.au/portal) Tj
+45 360 Td
+( - Session Token: Refer to your onboarding welcome email for your permanent direct auth link.) Tj
+45 343 Td
+( - Direct Chat Endpoint: POST /api/chat with {"session_token": "...", "message": "..."}) Tj
+ET
+
+% Support Footer Box
+0.96 0.96 0.96 rg
+45 80 505 50 re
+f
+
+0.8 0.8 0.8 rg
+45 80 505 1 re
+45 130 505 1 re
+f
+
+0.3 0.3 0.3 rg
+BT
+/F2 9.5 Tf
+60 108 Td
+(Need assistance or custom workflow integrations?) Tj
+/F1 9 Tf
+60 93 Td
+(Reach QuantMS Operations directly via your executive onboarding channel or support email.) Tj
+ET
+Q
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000350 00000 n 
+trailer
+<<
+  /Size 5
+  /Root 1 0 R
+>>
+startxref
+3009
+%%EOF
