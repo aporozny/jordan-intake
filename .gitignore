@@ -1,0 +1,11 @@
+.aider*
+.env
+.env
+.env.*
+*.log
+.aider*
+venv/
+__pycache__/
+*.db
+*.sqlite
+*.sqlite3
