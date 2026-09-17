@@ -1,22 +1,29 @@
-import os, sys, sqlite3, json, urllib.request
+import os
+import sys
+import sqlite3
 from dotenv import load_dotenv
 from web_tools import fetch_page_sync
+from openai import OpenAI
 
 load_dotenv("/home/andre/jordan-intake/.env")
 DB_PATH = os.path.expanduser("~/.jordan/jordan_users.db")
-OPENROUTER_KEY = os.getenv("OPENROUTER_API_KEY", "").strip()
-MODEL = os.getenv("LLM_MODEL", "anthropic/claude-sonnet-5").strip()
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", os.getenv("OPENROUTER_API_KEY", ""))
+MODEL = os.getenv("LLM_MODEL", "deepseek/deepseek-chat")
+
+client = OpenAI(
+    base_url=OPENAI_BASE_URL,
+    api_key=OPENAI_API_KEY
+)
 
 def summarize(markdown, biz_name):
     prompt = f"Analyze scraped site for {biz_name}. Provide a 2-3 sentence executive operational summary (core offering, target client, service model). No fluff:\n\n{markdown}"
-    body = json.dumps({"model": MODEL, "messages": [{"role": "user", "content": prompt}], "max_tokens": 200}).encode("utf-8")
-    req = urllib.request.Request(
-        "https://openrouter.ai/api/v1/chat/completions",
-        data=body,
-        headers={"Content-Type": "application/json", "Authorization": f"Bearer {OPENROUTER_KEY}"}
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=200
     )
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode("utf-8"))["choices"][0]["message"]["content"].strip()
+    return response.choices[0].message.content.strip()
 
 def enrich(user_id, url):
     print(f"Scraping {url}...")

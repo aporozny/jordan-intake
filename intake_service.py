@@ -225,72 +225,30 @@ def health_check():
 
 
 
+from openai import OpenAI
+
 def query_cloud_llm(system_prompt: str, user_prompt: str) -> Optional[str]:
-    """Queries OpenRouter or direct Anthropic using credentials from .env."""
-    import urllib.request
-    import json
+    """Queries LLM using OpenAI client with OpenRouter/Anthropic fallbacks."""
+    openai_client = OpenAI(
+        base_url=os.getenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1"),
+        api_key=os.getenv("OPENAI_API_KEY", os.getenv("OPENROUTER_API_KEY", ""))
+    )
+    model = os.getenv("LLM_MODEL", "deepseek/deepseek-chat")
 
-    openrouter_key = os.getenv("OPENROUTER_API_KEY", "").strip()
-    anthropic_key = os.getenv("ANTHROPIC_API_KEY", "").strip()
-    model = os.getenv("LLM_MODEL", "anthropic/claude-3.5-sonnet").strip()
-
-    # 1. Try OpenRouter
-    if openrouter_key:
-        try:
-            req_data = json.dumps({
-                "model": model,
-                "messages": [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                "temperature": 0.3,
-            }).encode("utf-8")
-
-            req = urllib.request.Request(
-                "https://openrouter.ai/api/v1/chat/completions",
-                data=req_data,
-                headers={
-                    "Content-Type": "application/json",
-                    "Authorization": f"Bearer {openrouter_key}",
-                    "HTTP-Referer": "https://jordan.quantms.com.au",
-                    "X-Title": "QuantMS Jordan Portal"
-                }
-            )
-            with urllib.request.urlopen(req, timeout=35) as resp:
-                result = json.loads(resp.read().decode("utf-8"))
-                return result["choices"][0]["message"]["content"].strip()
-        except Exception as e:
-            log_telemetry("LLM_ERROR_OPENROUTER", "API", str(e))
-
-    # 2. Try direct Anthropic
-    if anthropic_key:
-        try:
-            req_data = json.dumps({
-                "model": model if "claude" in model else "claude-3-5-sonnet-20241022",
-                "max_tokens": 1024,
-                "system": system_prompt,
-                "messages": [
-                    {"role": "user", "content": user_prompt}
-                ],
-                "temperature": 0.3
-            }).encode("utf-8")
-
-            req = urllib.request.Request(
-                "https://api.anthropic.com/v1/messages",
-                data=req_data,
-                headers={
-                    "Content-Type": "application/json",
-                    "x-api-key": anthropic_key,
-                    "anthropic-version": "2023-06-01"
-                }
-            )
-            with urllib.request.urlopen(req, timeout=35) as resp:
-                result = json.loads(resp.read().decode("utf-8"))
-                return result["content"][0]["text"].strip()
-        except Exception as e:
-            log_telemetry("LLM_ERROR_ANTHROPIC", "API", str(e))
-
-    return None
+    try:
+        response = openai_client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0.3,
+            max_tokens=1024
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        log_telemetry("LLM_ERROR", "API", str(e))
+        return None
 
 
 class ChatRequest(BaseModel):
