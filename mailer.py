@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv("/home/andre/jordan-intake/.env")
 import os
 import smtplib
 from email.message import EmailMessage
